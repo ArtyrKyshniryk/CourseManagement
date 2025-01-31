@@ -8,7 +8,7 @@ public class Course
     public int Id { get; set; }
     public string Name { get; set; }
     public string Description { get; set; }
-    public int Duration { get; set; }  // Тривалість курсу в годинах
+    public int Duration { get; set; }  
 }
 
 public class Student
@@ -16,7 +16,7 @@ public class Student
     public int Id { get; set; }
     public string Name { get; set; }
     public string Email { get; set; }
-    public DateTime BirthDate { get; set; }  // Дата народження
+    public DateTime BirthDate { get; set; }  
     public List<Course> Courses { get; set; } = new();
 }
 
@@ -41,8 +41,8 @@ class Program
         while (true)
         {
             Console.Clear();
-            Console.WriteLine("1. Додати курс\n2. Показати курси\n3. Оновити курс\n4. Видалити курс\n5. Додати студента\n6. Показати студентів\n7. Оновити студента\n8. Видалити студента\n9. Записати студента на курс\n10. Вийти");
-            Console.Write("Оберіть опцію: ");
+            Console.WriteLine("1. Dodaj kurs\n2. Pokaż kursy\n3. Aktualizuj kurs\n4. Usuń kurs\n5. Dodaj ucznia\n6. Pokaż uczniom\n7. Zaktualizuj ucznia\n8. Usuń ucznia\n9. Zapisz ucznia na kurs\n10. Wychodzić");
+            Console.Write("Wybierz opcję: ");
             var choice = Console.ReadLine();
             switch (choice)
             {
@@ -76,7 +76,7 @@ class Program
                 case "10":
                     return;
                 default:
-                    Console.WriteLine("Невірна опція. Спробуйте ще раз.");
+                    Console.WriteLine("Nieprawidłowa opcja. Spróbuj ponownie.");
                     break;
             }
         }
@@ -85,23 +85,23 @@ class Program
     static void ShowAddCourseMenu(AppDbContext db)
     {
         Console.Clear();
-        Console.WriteLine("Додати курс:");
+        Console.WriteLine("Dodaj kurs:");
         AddCourse(db);
         BackToMainMenu();
     }
 
     static void AddCourse(AppDbContext db)
     {
-        Console.Write("Назва курсу: ");
+        Console.Write("Nazwa kursu: ");
         string name = Console.ReadLine();
-        Console.Write("Опис курсу: ");
+        Console.Write("Opis kursu: ");
         string description = Console.ReadLine();
-        Console.Write("Тривалість курсу (в годинах): ");
+        Console.Write("Czas trwania kursu (w godzinach): ");
         int duration = int.Parse(Console.ReadLine());
 
         db.Courses.Add(new Course { Name = name, Description = description, Duration = duration });
         db.SaveChanges();
-        Console.WriteLine("Курс додано!\n");
+        Console.WriteLine("Kurs dodany!\n");
     }
 
     static void ShowCourses(AppDbContext db)
@@ -110,15 +110,15 @@ class Program
         var courses = db.Courses.ToList();
         if (courses.Any())
         {
-            Console.WriteLine("Список курсів:");
+            Console.WriteLine("Lista kursów:");
             foreach (var course in courses)
             {
-                Console.WriteLine($"{course.Id}: {course.Name} - {course.Description}, Тривалість: {course.Duration} годин");
+                Console.WriteLine($"{course.Id}: {course.Name} - {course.Description}, Czas trwania: {course.Duration} godziny");
             }
         }
         else
         {
-            Console.WriteLine("Курси не знайдені.");
+            Console.WriteLine("Nie znaleziono kursów.");
         }
         BackToMainMenu();
     }
@@ -126,27 +126,27 @@ class Program
     static void UpdateCourse(AppDbContext db)
     {
         Console.Clear();
-        ShowCourses(db); // Спочатку показуємо список курсів
+        ShowCourses(db); 
 
-        Console.Write("Введіть ID курсу для редагування: ");
+        Console.Write("Wprowadź identyfikator kursu, który chcesz edytować: ");
         int courseId = int.Parse(Console.ReadLine());
         var course = db.Courses.Find(courseId);
 
         if (course != null)
         {
-            Console.Write("Нова назва курсу: ");
+            Console.Write("Nowa nazwa kursu: ");
             course.Name = Console.ReadLine();
-            Console.Write("Новий опис курсу: ");
+            Console.Write("Nowy opis kursu: ");
             course.Description = Console.ReadLine();
-            Console.Write("Нова тривалість курсу (в годинах): ");
+            Console.Write("Nowy czas trwania kursu (w godzinach): ");
             course.Duration = int.Parse(Console.ReadLine());
 
             db.SaveChanges();
-            Console.WriteLine("Курс оновлено!\n");
+            Console.WriteLine("Kurs został zaktualizowany!\n");
         }
         else
         {
-            Console.WriteLine("Курс не знайдений.");
+            Console.WriteLine("Nie znaleziono kursu.");
         }
         BackToMainMenu();
     }
@@ -154,9 +154,9 @@ class Program
     static void DeleteCourse(AppDbContext db)
     {
         Console.Clear();
-        ShowCourses(db); // Спочатку показуємо список курсів
+        ShowCourses(db); 
 
-        Console.Write("Введіть ID курсу для видалення: ");
+        Console.Write("Wprowadź identyfikator kursu, który chcesz usunąć: ");
         int courseId = int.Parse(Console.ReadLine());
         var course = db.Courses.Find(courseId);
 
@@ -164,11 +164,11 @@ class Program
         {
             db.Courses.Remove(course);
             db.SaveChanges();
-            Console.WriteLine("Курс видалено!\n");
+            Console.WriteLine("Kurs został usunięty!\n");
         }
         else
         {
-            Console.WriteLine("Курс не знайдений.");
+            Console.WriteLine("Nie znaleziono kursu.");
         }
         BackToMainMenu();
     }
@@ -176,23 +176,23 @@ class Program
     static void ShowAddStudentMenu(AppDbContext db)
     {
         Console.Clear();
-        Console.WriteLine("Додати студента:");
+        Console.WriteLine("Dodaj ucznia:");
         AddStudent(db);
         BackToMainMenu();
     }
 
     static void AddStudent(AppDbContext db)
     {
-        Console.Write("Ім'я студента: ");
+        Console.Write("Imię i nazwisko ucznia: ");
         string name = Console.ReadLine();
-        Console.Write("Email студента: ");
+        Console.Write("E-mail studencki: ");
         string email = Console.ReadLine();
-        Console.Write("Дата народження (yyyy-mm-dd): ");
+        Console.Write("Data urodzenia (yyyy-mm-dd): ");
         DateTime birthDate = DateTime.Parse(Console.ReadLine());
 
         db.Students.Add(new Student { Name = name, Email = email, BirthDate = birthDate });
         db.SaveChanges();
-        Console.WriteLine("Студента додано!\n");
+        Console.WriteLine("Dodano ucznia!\n");
     }
 
     static void ShowStudents(AppDbContext db)
@@ -201,31 +201,30 @@ class Program
         var students = db.Students.Include(s => s.Courses).ToList();
         if (students.Any())
         {
-            Console.WriteLine("Список студентів:");
+            Console.WriteLine("Lista studentów:");
             foreach (var student in students)
             {
-                Console.WriteLine($"{student.Id}: {student.Name} - {student.Email}, Дата народження: {student.BirthDate.ToShortDateString()}");
+                Console.WriteLine($"{student.Id}: {student.Name} - {student.Email}, Data urodzenia: {student.BirthDate.ToShortDateString()}");
 
-                // Виведення курсів, на які записаний студент
                 if (student.Courses.Any())
                 {
-                    Console.WriteLine("Записані курси:");
+                    Console.WriteLine("Nagrane kursy:");
                     foreach (var course in student.Courses)
                     {
-                        Console.WriteLine($"- {course.Name}: {course.Description}, Тривалість: {course.Duration} годин");
+                        Console.WriteLine($"- {course.Name}: {course.Description}, Czas trwania: {course.Duration} godziny");
                     }
                 }
                 else
                 {
-                    Console.WriteLine("Студент не записаний на жоден курс.");
+                    Console.WriteLine("Student nie jest zapisany na żaden kurs.");
                 }
 
-                Console.WriteLine(); // Розрив між студентами
+                Console.WriteLine();
             }
         }
         else
         {
-            Console.WriteLine("Студенти не знайдені.");
+            Console.WriteLine("Nie znaleziono żadnych uczniów.");
         }
         BackToMainMenu();
     }
@@ -233,27 +232,27 @@ class Program
     static void UpdateStudent(AppDbContext db)
     {
         Console.Clear();
-        ShowStudents(db); // Спочатку показуємо список студентів
+        ShowStudents(db); 
 
-        Console.Write("Введіть ID студента для редагування: ");
+        Console.Write("Wprowadź identyfikator studenta, aby go edytować: ");
         int studentId = int.Parse(Console.ReadLine());
         var student = db.Students.Find(studentId);
 
         if (student != null)
         {
-            Console.Write("Нове ім'я студента: ");
+            Console.Write("Nowe imię i nazwisko studenta: ");
             student.Name = Console.ReadLine();
-            Console.Write("Новий Email студента: ");
+            Console.Write("Nowy e-mail studenta: ");
             student.Email = Console.ReadLine();
-            Console.Write("Нова дата народження (yyyy-mm-dd): ");
+            Console.Write("Nowa data urodzenia (yyyy-mm-dd): ");
             student.BirthDate = DateTime.Parse(Console.ReadLine());
 
             db.SaveChanges();
-            Console.WriteLine("Дані студента оновлено!\n");
+            Console.WriteLine("Dane ucznia zostały zaktualizowane!\n");
         }
         else
         {
-            Console.WriteLine("Студент не знайдений.");
+            Console.WriteLine("Nie znaleziono ucznia.");
         }
         BackToMainMenu();
     }
@@ -261,9 +260,9 @@ class Program
     static void DeleteStudent(AppDbContext db)
     {
         Console.Clear();
-        ShowStudents(db); // Спочатку показуємо список студентів
+        ShowStudents(db);
 
-        Console.Write("Введіть ID студента для видалення: ");
+        Console.Write("Wprowadź identyfikator studenta, który chcesz usunąć: ");
         int studentId = int.Parse(Console.ReadLine());
         var student = db.Students.Find(studentId);
 
@@ -271,11 +270,11 @@ class Program
         {
             db.Students.Remove(student);
             db.SaveChanges();
-            Console.WriteLine("Студента видалено!\n");
+            Console.WriteLine("Uczeń został usunięty!\n");
         }
         else
         {
-            Console.WriteLine("Студент не знайдений.");
+            Console.WriteLine("Nie znaleziono ucznia.");
         }
         BackToMainMenu();
     }
@@ -283,23 +282,23 @@ class Program
     static void EnrollStudent(AppDbContext db)
     {
         Console.Clear();
-        ShowCourses(db); // Спочатку показуємо список курсів
-        Console.Write("Введіть ID курсу: ");
+        ShowCourses(db);
+        Console.Write("Wprowadź identyfikator kursu: ");
         int courseId = int.Parse(Console.ReadLine());
 
-        Console.Write("Введіть Email студента: ");
+        Console.Write("Wpisz adres e-mail ucznia: ");
         string email = Console.ReadLine();
         var student = db.Students.Include(s => s.Courses).FirstOrDefault(s => s.Email == email);
         var course = db.Courses.Find(courseId);
 
         if (student == null)
         {
-            Console.WriteLine($"Студент з Email {email} не знайдений!\n");
+            Console.WriteLine($"Student z Email {email} nie znaleziono!\n");
         }
 
         if (course == null)
         {
-            Console.WriteLine($"Курс з ID {courseId} не знайдений!\n");
+            Console.WriteLine($"Kurs z ID {courseId} nie znaleziono!\n");
         }
 
         if (student != null && course != null)
@@ -308,20 +307,18 @@ class Program
             {
                 student.Courses.Add(course);
                 db.SaveChanges();
-                Console.WriteLine("Студент записаний на курс!\n");
+                Console.WriteLine("Student zostaje zapisany na kurs!\n");
             }
             else
             {
-                Console.WriteLine("Студент вже записаний на цей курс!\n");
+                Console.WriteLine("Student jest już zapisany na ten kurs!\n");
             }
         }
         BackToMainMenu();
     }
-
-    // Метод для повернення до головного меню
     static void BackToMainMenu()
     {
-        Console.WriteLine("\nНатисніть 'Enter' для повернення до головного меню.");
-        Console.ReadLine(); // Очікуємо натискання клавіші для повернення до основного меню
+        Console.WriteLine("\nNaciśnij „Enter”, aby powrócić do menu głównego.");
+        Console.ReadLine(); 
     }
 }

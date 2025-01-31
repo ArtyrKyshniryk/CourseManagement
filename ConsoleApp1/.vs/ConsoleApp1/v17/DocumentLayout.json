@@ -38,8 +38,7 @@
               "RelativeToolTip": "Migrations\\20250131111810_InitialCreate.cs",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T11:43:13.899Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T11:43:13.899Z"
             },
             {
               "$type": "Document",
@@ -51,8 +50,7 @@
               "RelativeToolTip": "Migrations\\AppDbContextModelSnapshot.cs",
               "ViewState": "AQIAABEAAAAAAAAAAAAgwA0AAAAqAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-31T11:42:57.021Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-31T11:42:57.021Z"
             },
             {
               "$type": "Document",
@@ -73,7 +71,7 @@
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "D:\\VS\\CourseManagement\\ConsoleApp1\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AQIAABsAAAAAAAAAAAAowDEAAAAqAAAA",
+              "ViewState": "AQIAACMBAAAAAAAAAAAgwEABAABMAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-31T11:14:13.351Z",
               "EditorCaption": ""
